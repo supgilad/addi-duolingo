@@ -126,19 +126,15 @@ class Duolingo(object):
 
         return self._make_dict(fields, self.user_data)
 
+from flask import Flask
+app = Flask(__name__)
 
+@app.route('/')
+def homepage():
+    d = Duolingo('addi390582', '132457')
+    ret = d.buy_streak_freeze()
+    return ret
 
 if __name__ == '__main__':
-    while True:
-        d = Duolingo('addi390582', '132457')
-        ret = d.buy_streak_freeze()
-        print ret
-        time.sleep(60)
+    app.run(debug=True, use_reloader=True)
 
-        # == '__main__'/:
-   #  from pprint import pprint
-   #
-   #  duolingo = Duolingo('ferguslongley')
-   #  knowntopic = duolingo.get_known_topics('it')
-   #
-   #  pprint(knowntopic)
