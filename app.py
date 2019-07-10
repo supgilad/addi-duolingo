@@ -132,7 +132,10 @@ app = Flask(__name__)
 @app.route('/')
 def homepage():
     d = Duolingo('addi390582', '132457')
-    ret = d.buy_streak_freeze()
+    try:
+        ret = d.buy_streak_freeze()
+    except Exception as e:
+        return e.message,400
     return ret
 
 if __name__ == '__main__':
