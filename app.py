@@ -127,6 +127,7 @@ class Duolingo(object):
         return self._make_dict(fields, self.user_data)
 
 from flask import Flask
+import json
 app = Flask(__name__)
 
 @app.route('/')
@@ -135,7 +136,7 @@ def homepage():
     try:
         ret = d.buy_streak_freeze()
     except Exception as e:
-        return e.message,400
+        return flask.jsonify(e.message),400
     return ret
 
 if __name__ == '__main__':
